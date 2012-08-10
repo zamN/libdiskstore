@@ -4,11 +4,11 @@
 #define _STORE_H
 class Store {
   public:
-    Store(std::string);
+    Store(std::string, int);
     int open();
     int open(std::string);
-    void write(int, void*);
-    std::string close(int);
+    void write(int, unsigned char*);
+    char* close(int);
     void read(int, int, int, char*);
   private:
     std::string path;
