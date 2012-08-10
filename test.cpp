@@ -14,9 +14,14 @@ int main(void) {
   std::string write_path;
   doc["write-path"] >> write_path;
 
+  // Checks if we can write to that path
+  if (access(write_path.c_str(), W_OK) == -1) {
+    std::cout << "No write access for directory: " << write_path << std::endl;
+    return -1;
+  }
+  
   // Creates store object and tests functions
   Store s(write_path);
   s.open();
-
   return 0;
 }
