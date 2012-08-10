@@ -12,7 +12,9 @@ int main(void) {
 
   // Reads the path to write the blocks to in the filesystem
   std::string write_path;
+  int file_count;
   doc["write-path"] >> write_path;
+  doc["file-count"] >> file_count;
 
   // Checks if we can write to that path
   if (access(write_path.c_str(), W_OK) == -1) {
@@ -21,7 +23,7 @@ int main(void) {
   }
   
   // Creates store object and tests functions
-  Store s(write_path);
+  Store s(write_path, file_count);
   s.open();
   return 0;
 }
