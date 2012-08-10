@@ -1,12 +1,12 @@
 CC=g++
-CFLAGS=-O2 -Wall
+CXXFLAGS=-O2 -Wall
 OUTFILE=test
 
-all: create
+all: $(OUTFILE)
 
 OBJECTS:=$(patsubst %.cpp,%.o,$(wildcard *.cpp))
 
-create: $(OBJECTS)
+$(OUTFILE): $(OBJECTS)
 	$(CC) $(CFLAGS) $^ -lyaml-cpp -o $(OUTFILE)
 
 clean:
