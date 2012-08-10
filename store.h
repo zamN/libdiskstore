@@ -1,12 +1,14 @@
+#include <string>
+
 #ifndef _STORE_H
 #define _STORE_H
-
 class Store {
   public:
+    Store(std::string);
     int open();
-    int open(sha256);
+    int open(std::string);
     void write(int, void*);
-    sha256 close(int);
+    std::string close(int);
     void read(int, int, int, char*);
 };
 #endif
