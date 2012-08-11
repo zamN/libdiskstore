@@ -24,6 +24,22 @@ int main(void) {
   
   // Creates store object and tests functions
   Store s(write_path, file_count);
-  s.open();
+  int new_count = s.open();
+
+  YAML::Emitter emitter;
+  emitter << YAML::BeginMap;
+  for(YAML::Iterator it = doc.begin(); it != doc.end(); ++it) {
+    emitter << YAML::Key << it.first();
+    emitter << YAML::Value;
+    if(it.first().to<std::string>() == "file-count")
+     emitter << new_count;
+    else
+        emitter << it.second();
+  }
+  emitter << YAML::EndMap;
+
+  std::fstream config("config.yml", std::ios::out | std::ios::trunc);
+  config << emitter.c_str();
+
   return 0;
 }
